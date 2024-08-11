@@ -37,8 +37,8 @@ resource "aws_lb" "my-loadbalancer" {
   load_balancer_type = "application"
   security_groups    = ["sg-0899928ebfbbdaf82"]
   subnets            = [
-    "subnet-00308d31ff7843ef4",  # Replace with your first subnet ID in a different AZ
-    "subnet-08774b4f299c3f5ef"   # Replace with your second subnet ID in a different AZ
+    "subnet-01c128d3336ef7f21",  # Replace with your first subnet ID in a different AZ
+    "subnet-02601abfad1bc8e20"   # Replace with your second subnet ID in a different AZ
   ]
 }
 
@@ -48,7 +48,7 @@ resource "aws_lb_target_group" "my-tg" {
   name     = "my-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = "vpc-0c28b7caa4a8934e1"  # Replace with your VPC ID
+  vpc_id   = "vpc-0164c3a11a9d79118"  # Replace with your VPC ID
   target_type = "instance"
 }
 
@@ -76,8 +76,8 @@ resource "aws_ecs_service" "my-svc" {
   desired_count   = 1
 
   network_configuration {
-    subnets         = ["subnet-00308d31ff7843ef4", "subnet-08774b4f299c3f5ef"]
-    security_groups = ["sg-0899928ebfbbdaf82"]
+    subnets         = ["subnet-02601abfad1bc8e20", "subnet-01c128d3336ef7f21"]
+    security_groups = ["sg-08a7c25f48e654a9b"]
     assign_public_ip = true
   }
 
