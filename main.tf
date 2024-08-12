@@ -59,18 +59,13 @@ resource "aws_lb_listener" "my-listener" {
   protocol          = "HTTP"
 
   default_action {
-    type = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "OK"
-      status_code  = "200"
-    }
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.my-tg.arn
   }
 }
 
 # ECS Service
 resource "aws_ecs_service" "my-svc" {
-  depends_on = [aws_lb.my-load-balancer]
   name            = "my-service"
   cluster         = aws_ecs_cluster.mycluster.id
   task_definition = aws_ecs_task_definition.my-tdf.arn
