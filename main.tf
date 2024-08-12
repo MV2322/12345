@@ -70,6 +70,7 @@ resource "aws_lb_listener" "my-listener" {
 
 # ECS Service
 resource "aws_ecs_service" "my-svc" {
+  depends_on = [aws_lb.my-load-balancer]
   name            = "my-service"
   cluster         = aws_ecs_cluster.mycluster.id
   task_definition = aws_ecs_task_definition.my-tdf.arn
